@@ -1,0 +1,107 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class BankeBank {
+
+    private Map<String, Account> accounts = new HashMap<>();
+
+    public String menu() {public List<String> listAllAccounts() {
+                                  List<String> accountList = new ArrayList<>();
+                                  for (Account account : accounts.values()) {
+                                      accountList.add(String.format("%s - %s %s - Balance: $%.2f",
+                                              account.accountNumber, account.firstName, account.lastName, account.balance));
+                                  }
+                                  return accountList;
+                              }
+        return """
+                1. CREATE ACCOUNT WITH (FIRST NAME, LAST NAME, PIN)
+                2. CLOSE ACCOUNT
+                3. DEPOSIT MONEY
+                4. WITHDRAW MONEY
+                5. CHECK ACCOUNT BALANCE
+                6. TRANSFER FROM ONE ACCOUNT TO ANOTHER
+                7. CHANGE PIN
+                8. LOGOUT
+                """;
+    }
+
+    public String createAccount(String firstName, String lastName, String pin) {
+        String accountNumber = String.valueOf(accounts.size() + 1); // Simple unique account number
+        accounts.put(accountNumber, new Account(firstName, lastName, pin, 0.0));
+        return "Account created successfully! Your account number is " + accountNumber;
+    }
+
+    public String closeAccount(String accountNumber) {
+        if (accounts.containsKey(accountNumber)) {
+            accounts.remove(accountNumber);
+            return "Account closed successfully!";
+        } else {
+            return "Account number not found!";
+        }
+    }
+
+    public String deposit(String accountNumber, double amount) {
+        if (accounts.containsKey(accountNumber)) {
+            Account account = accounts.get(accountNumber);
+            account.balance += amount;
+            return "Deposit successful! New balance is: " + account.balance;
+        } else {
+            return "Account number not found!";
+        }
+    }
+
+    public String withdraw(String accountNumber, String pin, double amount) {
+        if (accounts.containsKey(accountNumber)) {
+            Account account = accounts.get(accountNumber);
+            if (!account.pin.equals(pin)) {
+                return "Invalid PIN!";
+            }
+            if (amount > account.balance) {
+                return "Insufficient balance!";
+            }
+            account.balance -= amount;
+            return "Withdrawal successful! New balance is: " + account.balance;
+        } else {
+            return "Account number not found!";
+        }
+    }
+
+    public String checkBalance(String accountNumber, String pin) {
+        if (accounts.containsKey(accountNumber)) {
+            Account account = accounts.get(accountNumber);
+            if (!account.pin.equals(pin)) {
+                return "Invalid PIN!";
+            }
+            return "Your balance is: " + account.balance;
+        } else {
+            return "Account number not found!";
+        }
+    }
+
+    // Inner class to represent an account
+    class Account {
+        String firstName;
+        String lastName;
+        String pin;
+        double balance;
+
+        Account(String firstName, String lastName, String pin, double balance) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.pin = pin;
+            this.balance = balance;
+        }
+    }
+
+    public static void main(String[] args) {
+        BankeBank bank = new BankeBank();
+        System.out.println(bank.menu());
+
+        // Example usage:
+        System.out.println(bank.createAccount("John", "Doe", "1234"));
+        System.out.println(bank.deposit("1", 1000));
+        System.out.println(bank.checkBalance("1", "1234"));
+        System.out.println(bank.withdraw("1", "1234", 500));
+        System.out.println(bank.closeAccount("1"));
+    }
+}
