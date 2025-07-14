@@ -1,0 +1,2 @@
+Amount: 200.00 Date: 2025-07-14 Sender: Suliya Recipient: bran:
+Amount: 5000.00 Date: 2025-07-14 Sender: Quayyum Recipient: Eric:
