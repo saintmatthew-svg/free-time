@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Quiz App</h1>
+    <div id="role-selection">
+      <button id="student-btn">Student</button>
+      <button id="admin-btn">Admin</button>
+    </div>
+    
+    <div id="student-section" style="display: none;">
+      <form id="login-form">
+        <input type="text" id="student-name" placeholder="Enter your name" required>
+        <button type="submit">Start Quiz</button>
+      </form>
+    </div>
+    
+    <div id="quiz-section" style="display: none;">
+      <div id="quiz-container">
+        <div id="current-question"></div>
+        <form id="quiz-form"></form>
+        <button id="previous-question" style="display: none;">Previous Question</button>
+        <button id="next-question" style="display: none;">Next Question</button>
+        <button id="submit-quiz" style="display: none;">Submit Quiz</button>
+      </div>
+      <div id="results" style="display: none;"></div>
+    </div>
+    
+    <div id="admin-section" style="display: none;">
+      <h2>Add New Question</h2>
+      <form id="add-quiz-form">
+        <input type="text" id="question" placeholder="Question" required>
+        <input type="text" id="option1" placeholder="Option 1" required>
+        <input type="text" id="option2" placeholder="Option 2" required>
+        <input type="text" id="option3" placeholder="Option 3">
+        <input type="text" id="option4" placeholder="Option 4">
+        <input type="text" id="correct-answer" placeholder="Correct Answer" required>
+        <input type="text" id="category" placeholder="Category">
+        <button type="submit">Add Question</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
