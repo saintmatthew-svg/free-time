@@ -1,0 +1,1 @@
+[Transaction{amount=1000.0, sender='Suliha', recipient='Ibrahim', date=2025-07-14}] 
